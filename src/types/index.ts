@@ -19,7 +19,7 @@ export interface AttendanceRecord {
   studentId: string;
   subjectId: string;
   date: string;
-  status: 'present' | 'absent' | 'late';
+  status: "present" | "absent" | "late";
   markedBy: string;
   markedAt: Date;
 }
@@ -29,7 +29,7 @@ export interface Teacher {
   name: string;
   email: string;
   subjects: string[];
-  role: 'teacher' | 'admin';
+  role: "teacher" | "admin";
 }
 
 export interface AttendanceStats {
@@ -38,4 +38,12 @@ export interface AttendanceStats {
   absentToday: number;
   lateToday: number;
   attendanceRate: number;
+}
+
+export interface Subject {
+  id: string;
+  name: string;
+  year: string;
+  teacherId?: string;
+  students: string[];
 }
