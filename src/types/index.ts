@@ -9,9 +9,17 @@ export interface Student {
 export interface Subject {
   id: string;
   name: string;
+  code: string;
   year: string;
-  teacherId?: string;
-  students: string[];
+  description?: string;
+  academicYear: string;
+  term: string;
+  roomNumber?: string;
+  scheduleDays: string[];
+  scheduleTime?: string;
+  userId: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export interface AttendanceRecord {
@@ -40,10 +48,15 @@ export interface AttendanceStats {
   attendanceRate: number;
 }
 
-export interface Subject {
+export interface UserSettings {
   id: string;
-  name: string;
-  year: string;
-  teacherId?: string;
-  students: string[];
+  userId: string;
+  schoolYear: string;
+  defaultYearLevel: string;
+  attendanceReminderTime: string;
+  emailNotifications: boolean;
+  theme: "light" | "dark";
+  timezone: string;
+  createdAt: Date;
+  updatedAt: Date;
 }

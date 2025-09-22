@@ -5,8 +5,9 @@ import Layout from "./components/Layout";
 import Dashboard from "./components/Dashboard";
 import AttendanceMarking from "./components/AttendanceMarking";
 import StudentManagement from "./components/StudentManagement";
-import SubjectManagement from "./components/SubjectManagement";
+import Settings from "./components/Settings";
 import Reports from "./components/Reports";
+import SubjectManagement from "./components/SubjectManagement";
 import { AttendanceRecord } from "./types";
 import { useSupabaseData } from "./hooks/useSupabaseData";
 
@@ -16,18 +17,19 @@ const AppContent: React.FC = () => {
 
   const {
     students,
+    subjects,
     attendanceRecords,
     loading,
     error,
     addStudent,
+    addSubject,
     updateStudent,
+    updateSubject,
     deleteStudent,
+    deleteSubject,
+    assignStudentsToSubject,
     markAttendance,
     stats,
-    subjects,
-    addSubject,
-    updateSubject,
-    deleteSubject,
   } = useSupabaseData();
 
   if (authLoading) {
@@ -35,7 +37,7 @@ const AppContent: React.FC = () => {
       <div className='min-h-screen bg-gray-50 flex items-center justify-center'>
         <div className='text-center'>
           <div className='animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4'></div>
-          <p className='text-gray-600'>Loading...</p>       {" "}
+          <p className='text-gray-600'>Loading...</p>
         </div>
       </div>
     );
@@ -50,7 +52,7 @@ const AppContent: React.FC = () => {
       <div className='min-h-screen bg-gray-50 flex items-center justify-center'>
         <div className='text-center'>
           <div className='animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4'></div>
-          <p className='text-gray-600'>Loading your data...</p>       {" "}
+          <p className='text-gray-600'>Loading your data...</p>
         </div>
       </div>
     );
@@ -92,19 +94,16 @@ const AppContent: React.FC = () => {
       case "subjects":
         return (
           <SubjectManagement
-            subjects={subjects || []}
+            students={students}
+            subjects={subjects}
             onAddSubject={addSubject}
             onUpdateSubject={updateSubject}
             onDeleteSubject={deleteSubject}
+            onAssignStudents={assignStudentsToSubject}
           />
         );
       case "settings":
-        return (
-          <div className='bg-white p-8 rounded-xl shadow-sm border'>
-            <h2 className='text-2xl font-bold text-gray-900 mb-4'>Settings</h2>
-            <p className='text-gray-600'>Settings and configuration options coming soon...</p>
-          </div>
-        );
+        return <Settings />;
       default:
         return <Dashboard stats={stats} />;
     }
